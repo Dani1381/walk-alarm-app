@@ -1,0 +1,33 @@
+﻿2026-09-13T06:59:00.7147833Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T06:59:00.7153729Z ##[group]Run actions/setup-java@v4
+2026-09-13T06:59:00.7154837Z with:
+2026-09-13T06:59:00.7155640Z   java-version: 17
+2026-09-13T06:59:00.7156800Z   distribution: temurin
+2026-09-13T06:59:00.7157772Z   cache: gradle
+2026-09-13T06:59:00.7158636Z   java-package: jdk
+2026-09-13T06:59:00.7159583Z   check-latest: false
+2026-09-13T06:59:00.7160513Z   server-id: github
+2026-09-13T06:59:00.7161444Z   server-username: GITHUB_ACTOR
+2026-09-13T06:59:00.7162555Z   server-password: GITHUB_TOKEN
+2026-09-13T06:59:00.7163662Z   overwrite-settings: true
+2026-09-13T06:59:00.7164697Z   job-status: success
+2026-09-13T06:59:00.7174966Z   token: ***
+2026-09-13T06:59:00.7175816Z ##[endgroup]
+2026-09-13T06:59:00.8973883Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+2026-09-13T06:59:00.8990499Z ##[group]Installed distributions
+2026-09-13T06:59:00.9024665Z Resolved Java 17.0.20+1 from tool-cache
+2026-09-13T06:59:00.9026943Z Setting Java 17.0.20+1 as the default
+2026-09-13T06:59:00.9038366Z (node:2239) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-13T06:59:00.9043057Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-13T06:59:00.9046219Z Creating toolchains.xml for JDK version 17 from temurin
+2026-09-13T06:59:00.9121109Z Writing to /home/runner/.m2/toolchains.xml
+2026-09-13T06:59:00.9122105Z 
+2026-09-13T06:59:00.9127682Z Java configuration:
+2026-09-13T06:59:00.9146412Z   Distribution: temurin
+2026-09-13T06:59:00.9148431Z   Version: 17.0.20+1
+2026-09-13T06:59:00.9150534Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-09-13T06:59:00.9152434Z 
+2026-09-13T06:59:00.9154046Z ##[endgroup]
+2026-09-13T06:59:00.9179060Z Creating settings.xml with server-id: github
+2026-09-13T06:59:00.9198327Z Writing to /home/runner/.m2/settings.xml
+2026-09-13T06:59:01.0305196Z gradle cache is not found

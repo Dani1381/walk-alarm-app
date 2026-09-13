@@ -1,0 +1,8 @@
+2026-09-13T06:58:56.4660000Z Evaluating build.if
+2026-09-13T06:58:56.4660000Z Evaluating: success()
+2026-09-13T06:58:56.4660000Z Result: true
+2026-09-13T06:58:56.4700000Z Requested labels: ubuntu-latest
+2026-09-13T06:58:56.4700000Z Job defined at: Dani1381/walk-alarm-app/.github/workflows/build_apk.yml@refs/heads/main
+2026-09-13T06:58:56.4700000Z Waiting for a runner to pick up this job...
+2026-09-13T06:58:56.9600000Z Job is waiting for a hosted runner to come online.
+2026-09-13T06:58:56.9600000Z Job is about to start running on the hosted runner: GitHub Actions 1000000000
