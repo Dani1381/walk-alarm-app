@@ -1,0 +1,34 @@
+﻿2026-09-13T07:06:33.1334426Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T07:06:33.1335634Z Post job cleanup.
+2026-09-13T07:06:33.3369829Z In post-action step
+2026-09-13T07:06:33.3379961Z Stopping all Gradle daemons before saving Gradle User Home state
+2026-09-13T07:06:33.3381347Z Stopping Gradle daemons for /home/runner/gradle-installations/installs/gradle-8.4
+2026-09-13T07:06:33.3392982Z (node:2531) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-13T07:06:33.3394048Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-13T07:06:33.3399783Z [command]/home/runner/gradle-installations/installs/gradle-8.4/bin/gradle --stop
+2026-09-13T07:06:34.2752744Z Stopping Daemon(s)
+2026-09-13T07:06:34.2753410Z 1 Daemon stopped
+2026-09-13T07:06:34.2952484Z ##[group]Caching Gradle state
+2026-09-13T07:06:34.3215916Z Caching generated-gradle-jars with path '/home/runner/.gradle/caches/8.4/generated-gradle-jars/gradle-api-8.4.jar' and cache key: gradle-generated-gradle-jars-v1-1a83665c481822ee3817bdf1f75747ae
+2026-09-13T07:06:34.3225454Z Caching generated-gradle-jars with path '/home/runner/.gradle/caches/8.4/generated-gradle-jars/gradle-kotlin-dsl-extensions-8.4.jar' and cache key: gradle-generated-gradle-jars-v1-d75b4744b9d265c82f2e8033a6ad7da2
+2026-09-13T07:06:34.3405683Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:34.3435278Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:34.4057987Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/8.4/generated-gradle-jars/gradle-kotlin-dsl-extensions-8.4.jar' and key: gradle-generated-gradle-jars-v1-d75b4744b9d265c82f2e8033a6ad7da2: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0ekumagAAAAD4L1jNgyGAT7tbHlO9aug7Q0gxQUEyMDMwODEzMDM0AEVkZ2U=
+2026-09-13T07:06:34.7784699Z Caching dependencies with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and cache key: gradle-dependencies-v1-6efb8ed1fed25a9b867d5fcde04be2e9
+2026-09-13T07:06:34.8308642Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/8.4/generated-gradle-jars/gradle-api-8.4.jar' and key: gradle-generated-gradle-jars-v1-1a83665c481822ee3817bdf1f75747ae: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0ekumagAAAABO1fglNs9QR6CVkVj25Ke9Q0gxQUEyMDMwODE0MDMxAEVkZ2U=
+2026-09-13T07:06:34.8673641Z Caching instrumented-jars with path '/home/runner/.gradle/caches/jars-*/*/' and cache key: gradle-instrumented-jars-v1-75161818e8c521779df70765aab875de
+2026-09-13T07:06:34.8853664Z Caching kotlin-dsl with path '/home/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+2026-09-13T07:06:34.8854979Z /home/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and cache key: gradle-kotlin-dsl-v1-4c985f4daeb99bba551d73b5824bfe7a
+2026-09-13T07:06:34.9237288Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:34.9630111Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:35.0107498Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+/home/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and key: gradle-kotlin-dsl-v1-4c985f4daeb99bba551d73b5824bfe7a: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0e0umagAAAAAIfjtcq0c7TZu0F8G6lkDkQ0gxQUEyMDMwODEzMDYwAEVkZ2U=
+2026-09-13T07:06:35.2080470Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:36.0074052Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and key: gradle-dependencies-v1-6efb8ed1fed25a9b867d5fcde04be2e9: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0e0umagAAAADktoq8UWiERrI58bVROXbnQ0gxQUEyMDMwODEzMDYyAEVkZ2U=
+2026-09-13T07:06:36.2924205Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/jars-*/*/' and key: gradle-instrumented-jars-v1-75161818e8c521779df70765aab875de: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0fEumagAAAADSjSF6DJvTS5CmQOz6InvjQ0gxQUEyMDMwODE0MDYwAEVkZ2U=
+2026-09-13T07:06:36.3783598Z Caching Gradle User Home with cache key: gradle-home-v1|Linux|build[e080f0fdc288b6f0c5023fd4b86f7a10]-22a7051e80a5a883eb6682c28d4869a2bbb56e87
+2026-09-13T07:06:36.3881411Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:06:36.7044869Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches,/home/runner/.gradle/notifications,/home/runner/.gradle/.setup-gradle' and key: gradle-home-v1|Linux|build[e080f0fdc288b6f0c5023fd4b86f7a10]-22a7051e80a5a883eb6682c28d4869a2bbb56e87: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0fEumagAAAACgfy6QUNDXQ7hmwqkKjzXOQ0gxQUEyMDMwODE0MDM0AEVkZ2U=
+2026-09-13T07:06:36.7049362Z ##[endgroup]
+2026-09-13T07:06:36.7049714Z Generating Job Summary
+2026-09-13T07:06:36.7061324Z Completed post-action step

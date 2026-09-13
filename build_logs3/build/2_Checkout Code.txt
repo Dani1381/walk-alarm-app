@@ -1,0 +1,74 @@
+﻿2026-09-13T07:04:45.9726715Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T07:04:45.9738003Z ##[group]Run actions/checkout@v4
+2026-09-13T07:04:45.9739342Z with:
+2026-09-13T07:04:45.9740277Z   repository: Dani1381/walk-alarm-app
+2026-09-13T07:04:45.9749093Z   token: ***
+2026-09-13T07:04:45.9749977Z   ssh-strict: true
+2026-09-13T07:04:45.9750987Z   ssh-user: git
+2026-09-13T07:04:45.9751905Z   persist-credentials: true
+2026-09-13T07:04:45.9752929Z   clean: true
+2026-09-13T07:04:45.9753876Z   sparse-checkout-cone-mode: true
+2026-09-13T07:04:45.9755000Z   fetch-depth: 1
+2026-09-13T07:04:45.9755900Z   fetch-tags: false
+2026-09-13T07:04:45.9756845Z   show-progress: true
+2026-09-13T07:04:45.9757790Z   lfs: false
+2026-09-13T07:04:45.9758657Z   submodules: false
+2026-09-13T07:04:45.9759648Z   set-safe-directory: true
+2026-09-13T07:04:45.9760812Z   allow-unsafe-pr-checkout: false
+2026-09-13T07:04:45.9762114Z ##[endgroup]
+2026-09-13T07:04:46.0881839Z Syncing repository: Dani1381/walk-alarm-app
+2026-09-13T07:04:46.0885429Z ##[group]Getting Git version info
+2026-09-13T07:04:46.0887722Z Working directory is '/home/runner/work/walk-alarm-app/walk-alarm-app'
+2026-09-13T07:04:46.0891111Z [command]/usr/bin/git version
+2026-09-13T07:04:46.0948282Z git version 2.55.0
+2026-09-13T07:04:46.0979666Z ##[endgroup]
+2026-09-13T07:04:46.0996773Z Temporarily overriding HOME='/home/runner/work/_temp/349ebe97-6dac-4515-ba21-b7f4986b13d2' before making global git config changes
+2026-09-13T07:04:46.1008111Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-13T07:04:46.1012693Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/walk-alarm-app/walk-alarm-app
+2026-09-13T07:04:46.1054597Z Deleting the contents of '/home/runner/work/walk-alarm-app/walk-alarm-app'
+2026-09-13T07:04:46.1061417Z ##[group]Initializing the repository
+2026-09-13T07:04:46.1065667Z [command]/usr/bin/git init /home/runner/work/walk-alarm-app/walk-alarm-app
+2026-09-13T07:04:46.1149051Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-13T07:04:46.1153066Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-13T07:04:46.1156035Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-13T07:04:46.1158398Z hint: call:
+2026-09-13T07:04:46.1159647Z hint:
+2026-09-13T07:04:46.1161386Z hint: 	git config --global init.defaultBranch <name>
+2026-09-13T07:04:46.1163204Z hint:
+2026-09-13T07:04:46.1164974Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-13T07:04:46.1168009Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-13T07:04:46.1170292Z hint:
+2026-09-13T07:04:46.1171994Z hint: 	git branch -m <name>
+2026-09-13T07:04:46.1173481Z hint:
+2026-09-13T07:04:46.1175455Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-13T07:04:46.1178189Z Initialized empty Git repository in /home/runner/work/walk-alarm-app/walk-alarm-app/.git/
+2026-09-13T07:04:46.1183113Z [command]/usr/bin/git remote add origin https://github.com/Dani1381/walk-alarm-app
+2026-09-13T07:04:46.1219630Z ##[endgroup]
+2026-09-13T07:04:46.1223281Z ##[group]Disabling automatic garbage collection
+2026-09-13T07:04:46.1312171Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-13T07:04:46.1325053Z ##[endgroup]
+2026-09-13T07:04:46.1326523Z ##[group]Setting up auth
+2026-09-13T07:04:46.1327968Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-13T07:04:46.1332953Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-13T07:04:46.1694046Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-13T07:04:46.1742675Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-13T07:04:46.2009859Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-13T07:04:46.2077178Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-13T07:04:46.2327351Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-13T07:04:46.2368078Z ##[endgroup]
+2026-09-13T07:04:46.2377407Z ##[group]Fetching the repository
+2026-09-13T07:04:46.2380097Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +22a7051e80a5a883eb6682c28d4869a2bbb56e87:refs/remotes/origin/main
+2026-09-13T07:04:46.5398768Z From https://github.com/Dani1381/walk-alarm-app
+2026-09-13T07:04:46.5401120Z  * [new ref]         22a7051e80a5a883eb6682c28d4869a2bbb56e87 -> origin/main
+2026-09-13T07:04:46.5404831Z ##[endgroup]
+2026-09-13T07:04:46.5406450Z ##[group]Determining the checkout info
+2026-09-13T07:04:46.5408157Z ##[endgroup]
+2026-09-13T07:04:46.5413364Z [command]/usr/bin/git sparse-checkout disable
+2026-09-13T07:04:46.5466318Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-13T07:04:46.5502524Z ##[group]Checking out the ref
+2026-09-13T07:04:46.5506462Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-09-13T07:04:46.5653071Z Switched to a new branch 'main'
+2026-09-13T07:04:46.5655366Z branch 'main' set up to track 'origin/main'.
+2026-09-13T07:04:46.5659595Z ##[endgroup]
+2026-09-13T07:04:46.5676505Z [command]/usr/bin/git log -1 --format=%H
+2026-09-13T07:04:46.5711151Z 22a7051e80a5a883eb6682c28d4869a2bbb56e87

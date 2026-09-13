@@ -1,0 +1,36 @@
+﻿2026-09-13T07:03:42.2905931Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T07:03:42.2907202Z Post job cleanup.
+2026-09-13T07:03:42.4793569Z In post-action step
+2026-09-13T07:03:42.4803820Z Stopping all Gradle daemons before saving Gradle User Home state
+2026-09-13T07:03:42.4804756Z Stopping Gradle daemons for /usr/share/gradle-9.7.1
+2026-09-13T07:03:42.4818945Z (node:2591) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-13T07:03:42.4820241Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-13T07:03:42.4827107Z [command]/usr/share/gradle-9.7.1/bin/gradle --stop
+2026-09-13T07:03:43.2289415Z Stopping Daemon(s)
+2026-09-13T07:03:43.2292024Z 1 Daemon stopped
+2026-09-13T07:03:43.2402297Z ##[group]Caching Gradle state
+2026-09-13T07:03:43.5430760Z Caching dependencies with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and cache key: gradle-dependencies-v1-bc81673d6fa785e8c13703d72ab00e93
+2026-09-13T07:03:43.5634623Z Caching instrumented-jars with path '/home/runner/.gradle/caches/jars-*/*/' and cache key: gradle-instrumented-jars-v1-9adad48d0b2c821b3e2b2732f36307e6
+2026-09-13T07:03:43.5767299Z Caching kotlin-dsl with path '/home/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+2026-09-13T07:03:43.5768892Z /home/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and cache key: gradle-kotlin-dsl-v1-cc593b06a299183d7a048490ed5323e5
+2026-09-13T07:03:43.5805243Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:43.5917116Z Caching groovy-dsl with path '/home/runner/.gradle/caches/*/groovy-dsl/*/' and cache key: gradle-groovy-dsl-v1-10446a1d094d6f3c12e1da231db34db0
+2026-09-13T07:03:43.6217040Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:43.6341206Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:43.6548250Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/jars-*/*/' and key: gradle-instrumented-jars-v1-9adad48d0b2c821b3e2b2732f36307e6: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0z0qmagAAAABLxRNdx5VRRZWOTcsMCPM/UEhMMzBFREdFMDIwNgBFZGdl
+2026-09-13T07:03:43.6996474Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+/home/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and key: gradle-kotlin-dsl-v1-cc593b06a299183d7a048490ed5323e5: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0z0qmagAAAACfRTCOmDIFQp3/KIu2o6R0UEhMMzBFREdFMDQwNwBFZGdl
+2026-09-13T07:03:43.7048724Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/*/groovy-dsl/*/' and key: gradle-groovy-dsl-v1-10446a1d094d6f3c12e1da231db34db0: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0z0qmagAAAABlFwFIvvyoS61GSd0Tn8NKUEhMMzBFREdFMDIxMgBFZGdl
+2026-09-13T07:03:44.0028163Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:44.1929012Z Caching transforms with path '/home/runner/.gradle/caches/transforms-4/*/
+2026-09-13T07:03:44.1961035Z /home/runner/.gradle/caches/*/transforms/*/' and cache key: gradle-transforms-v1-8142090c43a6ffb9d7cd5fa6cdd92c7b
+2026-09-13T07:03:44.6498564Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and key: gradle-dependencies-v1-bc81673d6fa785e8c13703d72ab00e93: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>00EqmagAAAAC9bLzvBrsLTomJQlN7tQ7KUEhMMzBFREdFMDExOABFZGdl
+2026-09-13T07:03:44.7434253Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:46.0534528Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/transforms-4/*/
+/home/runner/.gradle/caches/*/transforms/*/' and key: gradle-transforms-v1-8142090c43a6ffb9d7cd5fa6cdd92c7b: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>00kqmagAAAACH3ufOu1RrRaD1u1F9AQiYUEhMMzBFREdFMDIwOABFZGdl
+2026-09-13T07:03:46.4941807Z Caching Gradle User Home with cache key: gradle-home-v1|Linux|build[e080f0fdc288b6f0c5023fd4b86f7a10]-f56d7810fb6d9ac11c92d43e5c7e5f1178ec97fe
+2026-09-13T07:03:46.5033072Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/walk-alarm-app/walk-alarm-app --files-from manifest.txt --use-compress-program zstdmt
+2026-09-13T07:03:46.6045317Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches,/home/runner/.gradle/notifications,/home/runner/.gradle/.setup-gradle' and key: gradle-home-v1|Linux|build[e080f0fdc288b6f0c5023fd4b86f7a10]-f56d7810fb6d9ac11c92d43e5c7e5f1178ec97fe: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>00kqmagAAAAD0MOA4mUJGT6Bwgv/sODx+UEhMMzBFREdFMDEyMQBFZGdl
+2026-09-13T07:03:46.6049462Z ##[endgroup]
+2026-09-13T07:03:46.6049816Z Generating Job Summary
+2026-09-13T07:03:46.6062873Z Completed post-action step
