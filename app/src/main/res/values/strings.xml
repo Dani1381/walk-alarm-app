@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WalkAlarm</string>
+    <string name="alarm_ringing">Wake Up! Alarm Ringing!</string>
+    <string name="walk_to_stop">Walk %1$d steps to turn off this alarm!</string>
+    <string name="steps_remaining">Steps Left: %1$d</string>
+    <string name="completed">Mission Completed!</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="test_in_5s">Test Alarm (5 Seconds)</string>
+</resources>
