@@ -48,8 +48,20 @@
             android:launchMode="singleInstance"
             android:theme="@style/Theme.WalkAlarmApp.FullScreen" />
 
+        <!-- Post-Alarm Wake-Up Check Activity -->
+        <activity
+            android:name=".ui.WakeUpCheckActivity"
+            android:exported="false"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@style/Theme.WalkAlarmApp.FullScreen" />
+
         <receiver
             android:name=".receiver.AlarmReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".receiver.WakeUpCheckReceiver"
             android:exported="false" />
 
         <receiver
