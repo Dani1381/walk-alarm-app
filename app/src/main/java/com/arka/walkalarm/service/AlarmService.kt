@@ -24,6 +24,15 @@ class AlarmService : Service() {
     private var mediaPlayer: MediaPlayer? = null
     private var vibrator: Vibrator? = null
     private var wakeLock: PowerManager.WakeLock? = null
+    private var originalVolume: Int = 100
+    private var isFocusModeActive = false
+
+    companion object {
+        const val CHANNEL_ID = "WalkAlarmChannel"
+        const val NOTIFICATION_ID = 1001
+        const val ACTION_LOWER_VOLUME = "com.arka.walkalarm.ACTION_LOWER_VOLUME"
+        const val ACTION_RESTORE_VOLUME = "com.arka.walkalarm.ACTION_RESTORE_VOLUME"
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -41,10 +50,21 @@ class AlarmService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val action = intent?.action
+        if (action == ACTION_LOWER_VOLUME) {
+            lowerVolumeForFocus()
+            return START_STICKY
+        } else if (action == ACTION_RESTORE_VOLUME) {
+            restoreMaxVolume()
+            return START_STICKY
+        }
+
         val requiredSteps = intent?.getIntExtra("REQUIRED_STEPS", 30) ?: 30
+        val missionType = intent?.getStringExtra("MISSION_TYPE") ?: "WALK"
 
         val fullScreenIntent = Intent(this, AlarmMissionActivity::class.java).apply {
             putExtra("REQUIRED_STEPS", requiredSteps)
+            putExtra("MISSION_TYPE", missionType)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
 
@@ -57,7 +77,7 @@ class AlarmService : Service() {
 
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("🚨 WalkAlarm is Ringing!")
-            .setContentText("Walk $requiredSteps steps to dismiss the alarm!")
+            .setContentText("Complete your mission to dismiss the alarm!")
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
@@ -82,8 +102,8 @@ class AlarmService : Service() {
                 ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
 
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            // Maximize alarm stream volume
             val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+            originalVolume = maxVol
             audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVol, 0)
 
             mediaPlayer = MediaPlayer().apply {
@@ -103,6 +123,31 @@ class AlarmService : Service() {
         }
     }
 
+    private fun lowerVolumeForFocus() {
+        if (isFocusModeActive) return
+        isFocusModeActive = true
+        try {
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+            val focusVol = (maxVol * 0.35f).toInt().coerceAtLeast(1)
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, focusVol, 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun restoreMaxVolume() {
+        if (!isFocusModeActive) return
+        isFocusModeActive = false
+        try {
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVol, 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun startVibration() {
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         val pattern = longArrayOf(0, 800, 400, 800, 400)
@@ -115,13 +160,12 @@ class AlarmService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        restoreMaxVolume()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
 
         vibrator?.cancel()
-        vibrator = null
-
         if (wakeLock?.isHeld == true) {
             wakeLock?.release()
         }
@@ -131,20 +175,15 @@ class AlarmService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "WalkAlarm Ringing Channel",
+                "WalkAlarm Alert Channel",
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "Emergency alarm channel"
-                setSound(null, null)
+                description = "Alarm Mission Notification"
+                setBypassDnd(true)
                 enableVibration(true)
             }
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
         }
-    }
-
-    companion object {
-        const val CHANNEL_ID = "WALK_ALARM_SERVICE_CHANNEL"
-        const val NOTIFICATION_ID = 9999
     }
 }

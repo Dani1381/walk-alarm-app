@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_primary">#6200EE</color>
-    <color name="purple_variant">#3700B3</color>
-    <color name="teal_secondary">#03DAC5</color>
-    <color name="dark_bg">#121212</color>
-    <color name="surface_card">#1E1E1E</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B0B0B0</color>
-    <color name="accent_orange">#FF9800</color>
-    <color name="accent_green">#4CAF50</color>
-    <color name="accent_red">#F44336</color>
+    <!-- Modern Tech Slate Dark Theme -->
+    <color name="bg_main">#0B0F19</color>
+    <color name="surface_card">#161F30</color>
+    <color name="surface_card_border">#22324C</color>
+    
+    <color name="primary_accent">#3B82F6</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_amber">#F59E0B</color>
+    <color name="accent_rose">#EF4444</color>
+    <color name="accent_violet">#8B5CF6</color>
+    
+    <color name="text_main">#F8FAFC</color>
+    <color name="text_muted">#94A3B8</color>
+    <color name="text_dim">#64748B</color>
+
+    <!-- Legacy mapped colors for backward compatibility -->
+    <color name="dark_bg">#0B0F19</color>
+    <color name="purple_primary">#3B82F6</color>
+    <color name="purple_variant">#1D4ED8</color>
+    <color name="teal_secondary">#10B981</color>
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="accent_green">#10B981</color>
+    <color name="accent_orange">#F59E0B</color>
+    <color name="accent_red">#EF4444</color>
 </resources>
