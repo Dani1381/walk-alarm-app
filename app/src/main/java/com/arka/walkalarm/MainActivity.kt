@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.arka.walkalarm.alarm.AlarmScheduler
 import com.arka.walkalarm.presets.TemplateManager
 import com.google.android.material.button.MaterialButton
