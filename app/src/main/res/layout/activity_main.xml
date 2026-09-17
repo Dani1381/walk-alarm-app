@@ -11,130 +11,71 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="22dp">
 
-        <!-- App Header -->
+        <!-- Top Bar with Glow Badge -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🚶 WalkAlarm v2.0"
-                android:textColor="@color/text_main"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.02"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WALKALARM"
+                    android:textColor="@color/text_main"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.04"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next-Gen Mission Alarm • Focus Engine"
+                    android:textColor="@color/text_muted"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PRO"
-                android:textColor="@color/bg_main"
-                android:textSize="12sp"
+                android:text="ULTRA v2.0"
+                android:textColor="#080C14"
+                android:textSize="11sp"
                 android:textStyle="bold"
+                android:letterSpacing="0.06"
                 android:background="@drawable/badge_bg"
-                android:backgroundTint="@color/accent_emerald"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="3dp"/>
+                android:backgroundTint="@color/neon_cyan"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"/>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Smart Missions &amp; Focus Mode — Wake up guaranteed"
-            android:textColor="@color/text_muted"
-            android:textSize="13sp"/>
-
-        <!-- Scheduled Alarm Banner -->
+        <!-- Futuristic Clock Display Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="NEXT ALARM"
-                        android:textColor="@color/text_dim"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.08"/>
-
-                    <TextView
-                        android:id="@+id/tvCurrentAlarm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="07:00"
-                        android:textColor="@color/accent_amber"
-                        android:textSize="36sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSetTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CHANGE"
-                    android:textColor="@color/text_main"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="@color/primary_accent"
-                    app:cornerRadius="14dp"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- MISSION TEMPLATES SECTION -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SELECT MISSION TEMPLATE"
-            android:textColor="@color/text_dim"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.08"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="12dp"/>
-
-        <!-- Template 1: Balanced (Default) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardTemplateBalanced"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="16dp"
-            app:strokeColor="@color/accent_emerald"
-            app:strokeWidth="2dp">
+            app:cardCornerRadius="26dp"
+            app:strokeColor="#22365A"
+            app:strokeWidth="1.5dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:background="@drawable/bg_alarm_time_card"
+                android:padding="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,10 +87,174 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="⚡ Balanced Wake (Recommended)"
-                        android:textColor="@color/text_main"
-                        android:textSize="16sp"
+                        android:text="SCHEDULED WAKE TIME"
+                        android:textColor="@color/neon_cyan"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="● DAILY ACTIVE"
+                        android:textColor="@color/neon_emerald"
+                        android:textSize="11sp"
                         android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvCurrentAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="07:00"
+                        android:textColor="@color/text_main"
+                        android:textSize="56sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="AM"
+                        android:textColor="@color/text_dim"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSetTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="EDIT TIME"
+                        android:textColor="@color/text_main"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:backgroundTint="@color/neon_blue"
+                        app:cornerRadius="16dp"
+                        android:layout_marginBottom="4dp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#1E2E4A"
+                    android:layout_marginVertical="14dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🛡️ Doze Mode Bypass: Active"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔋 Sensor Fusion: On"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Mission Selection Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MISSION PRESET CARDS"
+                android:textColor="@color/text_dim"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TAP TO ACTIVATE"
+                android:textColor="@color/neon_cyan"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Template 1: Balanced Wake -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTemplateBalanced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="20dp"
+            app:strokeColor="@color/neon_emerald"
+            app:strokeWidth="2dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡"
+                        android:textSize="22sp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Balanced Wake"
+                            android:textColor="@color/text_main"
+                            android:textSize="17sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Recommended Routine"
+                            android:textColor="@color/neon_emerald"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <RadioButton
                         android:id="@+id/rbBalanced"
@@ -162,29 +267,30 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🚶 15 Steps  +  🧠 2 Math Puzzles  +  ⏰ 3-min Alertness Check"
-                    android:textColor="@color/accent_emerald"
+                    android:text="🚶 15 Steps  •  🧠 2 Math Puzzles  •  ⏰ 3m Alertness Check"
+                    android:textColor="@color/text_muted"
                     android:textSize="13sp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Template 2: Heavy Sleeper -->
+        <!-- Template 2: Heavy Sleeper Extreme -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTemplateExtreme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="20dp"
             app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp">
+            app:strokeWidth="1dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="18dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,13 +299,34 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="22sp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="🔥 Extreme (Heavy Sleeper)"
-                        android:textColor="@color/text_main"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Heavy Sleeper Extreme"
+                            android:textColor="@color/text_main"
+                            android:textSize="17sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Maximum Awake Assurance"
+                            android:textColor="@color/neon_rose"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <RadioButton
                         android:id="@+id/rbExtreme"
@@ -212,10 +339,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🚶 35 Steps  +  🧠 4 Hard Puzzles  +  ⏰ Strict Alertness Check"
-                    android:textColor="@color/accent_rose"
+                    android:text="🚶 35 Steps  •  🧠 4 Hard Puzzles  •  🚨 Instant Re-Ring"
+                    android:textColor="@color/text_muted"
                     android:textSize="13sp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -224,17 +351,18 @@
             android:id="@+id/cardTemplateWalker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="20dp"
             app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp">
+            app:strokeWidth="1dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="18dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,13 +371,34 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚶"
+                        android:textSize="22sp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="🚶 Pure Walker"
-                        android:textColor="@color/text_main"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pure Walker"
+                            android:textColor="@color/text_main"
+                            android:textSize="17sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Zero Math • Movement Only"
+                            android:textColor="@color/neon_cyan"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <RadioButton
                         android:id="@+id/rbWalker"
@@ -262,10 +411,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🚶 30 Steps  •  No puzzles  •  Classic walk to dismiss"
-                    android:textColor="@color/primary_accent"
+                    android:text="🚶 30 Steps  •  No puzzles  •  Sensor fusion active"
+                    android:textColor="@color/text_muted"
                     android:textSize="13sp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -274,17 +423,18 @@
             android:id="@+id/cardTemplateBrain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="20dp"
             app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp">
+            app:strokeWidth="1dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="18dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -293,13 +443,34 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🧠"
+                        android:textSize="22sp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="🧠 Brain Workout (In Bed)"
-                        android:textColor="@color/text_main"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Brain Workout"
+                            android:textColor="@color/text_main"
+                            android:textSize="17sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Solve in Bed • Focus Mode"
+                            android:textColor="@color/neon_violet"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <RadioButton
                         android:id="@+id/rbBrain"
@@ -312,35 +483,37 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🧠 5 Math Puzzles  •  0 Steps required  •  Focus mode active"
-                    android:textColor="@color/accent_violet"
+                    android:text="🧠 5 Math Puzzles  •  0 Steps required  •  Calm Sound key"
+                    android:textColor="@color/text_muted"
                     android:textSize="13sp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Test Alarm Button -->
+        <!-- Quick Test Glow Action Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTestNow"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="16dp"
-            android:text="⚡ QUICK TEST (RING IN 5S)"
-            android:textColor="@color/text_main"
+            android:layout_height="62dp"
+            android:layout_marginTop="18dp"
+            android:text="⚡ TEST MISSION (RING IN 5S)"
+            android:textColor="#080C14"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:backgroundTint="@color/accent_emerald"
-            app:cornerRadius="18dp"/>
+            android:letterSpacing="0.06"
+            android:backgroundTint="@color/neon_cyan"
+            app:cornerRadius="20dp"
+            app:elevation="8dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Dual Sensor Fusion • Focus Mode • Wake-Up Verification"
+            android:text="Crafted for Dani • Android 14+ Lock Screen Bypass"
             android:textColor="@color/text_dim"
             android:textSize="12sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="28dp"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

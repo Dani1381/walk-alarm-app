@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Modern Tech Slate Dark Theme -->
-    <color name="bg_main">#0B0F19</color>
-    <color name="surface_card">#161F30</color>
-    <color name="surface_card_border">#22324C</color>
+    <!-- Ultra Dark Cyber-OLED Theme -->
+    <color name="bg_main">#080C14</color>
+    <color name="bg_secondary">#0F172A</color>
     
-    <color name="primary_accent">#3B82F6</color>
-    <color name="accent_emerald">#10B981</color>
-    <color name="accent_amber">#F59E0B</color>
-    <color name="accent_rose">#EF4444</color>
-    <color name="accent_violet">#8B5CF6</color>
+    <!-- Glassmorphic Cards -->
+    <color name="surface_card">#131D31</color>
+    <color name="surface_card_border">#1E293B</color>
+    <color name="surface_card_glow">#1E3A8A</color>
     
-    <color name="text_main">#F8FAFC</color>
+    <!-- Neon Cyber Accents -->
+    <color name="neon_cyan">#06B6D4</color>
+    <color name="neon_blue">#3B82F6</color>
+    <color name="neon_indigo">#6366F1</color>
+    <color name="neon_violet">#A855F7</color>
+    <color name="neon_emerald">#10B981</color>
+    <color name="neon_amber">#F59E0B</color>
+    <color name="neon_rose">#F43F5E</color>
+    
+    <!-- Typography -->
+    <color name="text_main">#FFFFFF</color>
     <color name="text_muted">#94A3B8</color>
-    <color name="text_dim">#64748B</color>
+    <color name="text_dim">#475569</color>
 
     <!-- Legacy mapped colors for backward compatibility -->
-    <color name="dark_bg">#0B0F19</color>
-    <color name="purple_primary">#3B82F6</color>
-    <color name="purple_variant">#1D4ED8</color>
+    <color name="dark_bg">#080C14</color>
+    <color name="purple_primary">#06B6D4</color>
+    <color name="purple_variant">#3B82F6</color>
     <color name="teal_secondary">#10B981</color>
-    <color name="text_primary">#F8FAFC</color>
+    <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#94A3B8</color>
     <color name="accent_green">#10B981</color>
     <color name="accent_orange">#F59E0B</color>
-    <color name="accent_red">#EF4444</color>
+    <color name="accent_red">#F43F5E</color>
+    <color name="primary_accent">#06B6D4</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_amber">#F59E0B</color>
+    <color name="accent_rose">#F43F5E</color>
+    <color name="accent_violet">#A855F7</color>
 </resources>

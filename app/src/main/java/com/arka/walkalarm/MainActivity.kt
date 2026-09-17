@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
             TemplateManager.setSelectedTemplate(this, id)
             val currentTemplate = TemplateManager.getSelectedTemplate(this)
             
-            // Save to prefs
             getSharedPreferences("WalkAlarmPrefs", Context.MODE_PRIVATE).edit().apply {
                 putInt("REQUIRED_STEPS", currentTemplate.requiredSteps)
                 putInt("REQUIRED_PUZZLES", currentTemplate.requiredPuzzles)
@@ -108,15 +107,25 @@ class MainActivity : AppCompatActivity() {
             rbWalker.isChecked = (id == "pure_walker")
             rbBrain.isChecked = (id == "brain_workout")
 
-            val activeBorder = getColor(R.color.accent_emerald)
+            val activeEmerald = getColor(R.color.neon_emerald)
+            val activeRose = getColor(R.color.neon_rose)
+            val activeCyan = getColor(R.color.neon_cyan)
+            val activeViolet = getColor(R.color.neon_violet)
             val normalBorder = getColor(R.color.surface_card_border)
 
-            cardBalanced.strokeColor = if (id == "balanced") activeBorder else normalBorder
-            cardExtreme.strokeColor = if (id == "heavy_sleeper") getColor(R.color.accent_rose) else normalBorder
-            cardWalker.strokeColor = if (id == "pure_walker") getColor(R.color.primary_accent) else normalBorder
-            cardBrain.strokeColor = if (id == "brain_workout") getColor(R.color.accent_violet) else normalBorder
+            cardBalanced.strokeColor = if (id == "balanced") activeEmerald else normalBorder
+            cardBalanced.strokeWidth = if (id == "balanced") 6 else 2
 
-            Toast.makeText(this, "Selected: ${currentTemplate.name}", Toast.LENGTH_SHORT).show()
+            cardExtreme.strokeColor = if (id == "heavy_sleeper") activeRose else normalBorder
+            cardExtreme.strokeWidth = if (id == "heavy_sleeper") 6 else 2
+
+            cardWalker.strokeColor = if (id == "pure_walker") activeCyan else normalBorder
+            cardWalker.strokeWidth = if (id == "pure_walker") 6 else 2
+
+            cardBrain.strokeColor = if (id == "brain_workout") activeViolet else normalBorder
+            cardBrain.strokeWidth = if (id == "brain_workout") 6 else 2
+
+            Toast.makeText(this, "Active: ${currentTemplate.name}", Toast.LENGTH_SHORT).show()
         }
 
         updateSelection(selected)
