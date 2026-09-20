@@ -3,6 +3,26 @@ package com.arka.walkalarm
 import android.content.Context
 import android.graphics.Color
 
+class ThemeManager {
+    companion object {
+        private const val PREFS_NAME = "WalkAlarmThemePrefs"
+        private const val KEY_THEME = "APP_THEME_ID"
+
+        fun getCurrentTheme(context: Context): AppTheme {
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val themeId = prefs.getString(KEY_THEME, AppTheme.CYBER_OLED.id)
+            return AppTheme.values().find { it.id == themeId } ?: AppTheme.CYBER_OLED
+        }
+
+        fun setTheme(context: Context, theme: AppTheme) {
+            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putString(KEY_THEME, theme.id)
+                .apply()
+        }
+    }
+}
+
 enum class AppTheme(
     val id: String,
     val title: String,
@@ -47,23 +67,5 @@ enum class AppTheme(
         Color.parseColor("#F59E0B"),
         Color.parseColor("#FFFFFF"),
         Color.parseColor("#442512")
-    );
-
-    companion object {
-        private const val PREFS_NAME = "WalkAlarmThemePrefs"
-        private const val KEY_THEME = "APP_THEME_ID"
-
-        fun getCurrentTheme(context: Context): AppTheme {
-            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            val themeId = prefs.getString(KEY_THEME, CYBER_OLED.id)
-            return values().find { it.id == themeId } ?: CYBER_OLED
-        }
-
-        fun setTheme(context: Context, theme: AppTheme) {
-            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                .edit()
-                .putString(KEY_THEME, theme.id)
-                .apply()
-        }
-    }
+    )
 }
