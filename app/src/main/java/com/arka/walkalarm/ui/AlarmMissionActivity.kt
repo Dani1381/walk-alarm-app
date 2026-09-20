@@ -1,5 +1,6 @@
 package com.arka.walkalarm.ui
 
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.arka.walkalarm.R
 import com.arka.walkalarm.sensor.StepDetectorManager
 import com.arka.walkalarm.service.AlarmService
+import com.arka.walkalarm.theme.ThemeManager
 import kotlin.random.Random
 
 class AlarmMissionActivity : AppCompatActivity() {
@@ -52,21 +54,25 @@ class AlarmMissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Lock screen bypass & wake screen
+        // Aggressive Full-Screen Wake-up & Lock Screen Bypass
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
             setTurnScreenOn(true)
-        } else {
-            @Suppress("DEPRECATION")
-            window.addFlags(
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-            )
+            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager
+            keyguardManager?.requestDismissKeyguard(this, null)
         }
 
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
         setContentView(R.layout.activity_alarm_mission)
+
+        applyActiveTheme()
 
         requiredSteps = intent.getIntExtra("REQUIRED_STEPS", 20)
 
@@ -77,6 +83,11 @@ class AlarmMissionActivity : AppCompatActivity() {
 
         // Show motivating wake-up pop-up
         showWakeUpPopup()
+    }
+
+    private fun applyActiveTheme() {
+        val currentTheme = ThemeManager.getCurrentTheme(this)
+        findViewById<android.view.View>(android.R.id.content)?.setBackgroundColor(currentTheme.bgMainColor)
     }
 
     private fun initViews() {
@@ -99,213 +110,171 @@ class AlarmMissionActivity : AppCompatActivity() {
 
         btnDismiss.setOnClickListener {
             if (isWalkCompleted && isPuzzleCompleted) {
-                stopAlarmAndExit()
+                stopService(Intent(this, AlarmService::class.java))
+                finish()
             }
         }
     }
 
     private fun setupWalkMission() {
-        stepDetector = StepDetectorManager(this) {
-            runOnUiThread {
-                if (!isWalkCompleted) {
-                    currentSteps++
-                    updateStepUI()
-                    if (currentSteps >= requiredSteps) {
-                        isWalkCompleted = true
-                        tvStepStatusBadge.text = "✅ Done"
-                        tvStepStatusBadge.setTextColor(getColor(R.color.accent_emerald))
-                        checkAllMissionsDone()
-                    }
-                }
+        stepDetector = StepDetectorManager(this) { stepCount ->
+            currentSteps = stepCount
+            updateStepUI()
+
+            if (currentSteps >= requiredSteps && !isWalkCompleted) {
+                isWalkCompleted = true
+                onWalkCompleted()
             }
         }
-    }
+        stepDetector.start()
 
-    private fun setupPuzzleMission() {
-        val choiceButtons = listOf(btnChoice1, btnChoice2, btnChoice3, btnChoice4)
-        for (btn in choiceButtons) {
-            btn.setOnClickListener {
-                val selected = btn.text.toString().toIntOrNull()
-                if (selected == currentCorrectAnswer) {
-                    solvedPuzzles++
-                    // Auto-lower volume temporarily while user is actively solving
-                    activateFocusMode(15)
-                    if (solvedPuzzles >= requiredPuzzles) {
-                        isPuzzleCompleted = true
-                        tvPuzzleEquation.text = "🎉 Solved!"
-                        tvPuzzleStatusBadge.text = "✅ Brain is active!"
-                        tvPuzzleStatusBadge.setTextColor(getColor(R.color.accent_emerald))
-                        for (b in choiceButtons) b.isEnabled = false
-                        checkAllMissionsDone()
-                    } else {
-                        tvPuzzleStatusBadge.text = "$solvedPuzzles / $requiredPuzzles solved! Next one:"
-                        generateNewPuzzle()
-                    }
-                } else {
-                    // Wrong answer penalty: shake or prompt
-                    tvPuzzleStatusBadge.text = "❌ Wrong! Try again!"
-                    tvPuzzleStatusBadge.setTextColor(getColor(R.color.accent_rose))
-                    // Restore loud alarm immediately on mistake
-                    restoreLoudSound()
-                }
-            }
-        }
-        generateNewPuzzle()
-    }
-
-    private fun generateNewPuzzle() {
-        val type = Random.nextInt(2) // 0: addition/subtraction, 1: multiplication
-        val num1: Int
-        val num2: Int
-        val equationStr: String
-
-        if (type == 0) {
-            num1 = Random.nextInt(18, 59)
-            num2 = Random.nextInt(15, 49)
-            currentCorrectAnswer = num1 + num2
-            equationStr = "$num1 + $num2 = ?"
-        } else {
-            num1 = Random.nextInt(6, 12)
-            num2 = Random.nextInt(4, 9)
-            currentCorrectAnswer = num1 * num2
-            equationStr = "$num1 × $num2 = ?"
-        }
-
-        tvPuzzleEquation.text = equationStr
-
-        // Generate 3 unique wrong answers
-        val wrongAnswers = mutableSetOf<Int>()
-        while (wrongAnswers.size < 3) {
-            val delta = Random.nextInt(-10, 11)
-            val fake = currentCorrectAnswer + delta
-            if (fake != currentCorrectAnswer && fake > 0) {
-                wrongAnswers.add(fake)
-            }
-        }
-
-        val allChoices = (wrongAnswers.toList() + currentCorrectAnswer).shuffled()
-        val buttons = listOf(btnChoice1, btnChoice2, btnChoice3, btnChoice4)
-        for (i in 0..3) {
-            buttons[i].text = allChoices[i].toString()
-        }
-    }
-
-    private fun setupFocusMode() {
-        btnCalmSound.setOnClickListener {
-            activateFocusMode(25) // 25 seconds calm period
-        }
-    }
-
-    private fun activateFocusMode(seconds: Int) {
-        focusTimer?.cancel()
-        isFocusActive = true
-        btnCalmSound.isEnabled = false
-
-        // Send Intent to Service to lower volume
-        val lowerIntent = Intent(this, AlarmService::class.java).apply {
-            action = AlarmService.ACTION_LOWER_VOLUME
-        }
-        startService(lowerIntent)
-
-        focusTimer = object : CountDownTimer(seconds * 1000L, 1000L) {
-            override fun onTick(millisUntilFinished: Long) {
-                val secLeft = millisUntilFinished / 1000
-                btnCalmSound.text = "🔉 Calm: ${secLeft}s left to solve"
-            }
-
-            override fun onFinish() {
-                restoreLoudSound()
-            }
-        }.start()
-    }
-
-    private fun restoreLoudSound() {
-        focusTimer?.cancel()
-        isFocusActive = false
-        btnCalmSound.isEnabled = true
-        btnCalmSound.text = "🔉 Calm Sound (Focus Mode)"
-
-        val restoreIntent = Intent(this, AlarmService::class.java).apply {
-            action = AlarmService.ACTION_RESTORE_VOLUME
-        }
-        startService(restoreIntent)
-    }
-
-    private fun showWakeUpPopup() {
-        try {
-            AlertDialog.Builder(this)
-                .setTitle("☀️ Rise and Shine, Dani!")
-                .setMessage("To turn off this alarm:\n\n1️⃣ Walk $requiredSteps real steps\n2️⃣ Solve $requiredPuzzles quick math puzzles\n\nSound can be calmed with the 'Calm Sound' button while you solve!")
-                .setPositiveButton("Let's Go! 💪", null)
-                .setCancelable(false)
-                .show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        tvSensorInfo.text = "سنسور گام‌شمار فعال • ${if (stepDetector.isHardwareStepDetectorAvailable()) "دقیق سخت‌افزاری" else "شتاب‌سنج هیبریدی"}"
     }
 
     private fun updateStepUI() {
         val remaining = (requiredSteps - currentSteps).coerceAtLeast(0)
         tvRemainingSteps.text = remaining.toString()
-        progressBarSteps.progress = currentSteps.coerceAtMost(requiredSteps)
-        tvSensorInfo.text = "🚶 Keep moving! $currentSteps / $requiredSteps steps taken"
+        progressBarSteps.progress = currentSteps
+
+        if (remaining == 0) {
+            tvStepStatusBadge.text = "تکمیل شد ✓"
+            tvStepStatusBadge.setTextColor(getColor(R.color.neon_emerald))
+        } else {
+            tvStepStatusBadge.text = "$currentSteps / $requiredSteps گام"
+        }
+    }
+
+    private fun onWalkCompleted() {
+        stepDetector.stop()
+        checkAllMissionsDone()
+    }
+
+    private fun setupPuzzleMission() {
+        generateNewPuzzle()
+
+        val buttons = listOf(btnChoice1, btnChoice2, btnChoice3, btnChoice4)
+        buttons.forEach { btn ->
+            btn.setOnClickListener {
+                val chosen = btn.text.toString().toIntOrNull()
+                if (chosen == currentCorrectAnswer) {
+                    solvedPuzzles++
+                    if (solvedPuzzles >= requiredPuzzles) {
+                        isPuzzleCompleted = true
+                        tvPuzzleStatusBadge.text = "معماها حل شد ✓"
+                        tvPuzzleStatusBadge.setTextColor(getColor(R.color.neon_emerald))
+                        tvPuzzleEquation.text = "آفرین! ذهن شما کاملاً بیدار شد 🧠"
+                        buttons.forEach { b -> b.isEnabled = false }
+                        checkAllMissionsDone()
+                    } else {
+                        generateNewPuzzle()
+                    }
+                } else {
+                    btn.setBackgroundColor(getColor(R.color.neon_rose))
+                    btn.postDelayed({
+                        btn.setBackgroundColor(getColor(R.color.surface_card))
+                    }, 500)
+                }
+            }
+        }
+    }
+
+    private fun generateNewPuzzle() {
+        val a = Random.nextInt(12, 45)
+        val b = Random.nextInt(7, 30)
+        val isAddition = Random.nextBoolean()
+
+        val question: String
+        if (isAddition) {
+            currentCorrectAnswer = a + b
+            question = "$a + $b = ?"
+        } else {
+            val high = maxOf(a, b)
+            val low = minOf(a, b)
+            currentCorrectAnswer = high - low
+            question = "$high - $low = ?"
+        }
+
+        tvPuzzleEquation.text = question
+        tvPuzzleStatusBadge.text = "معمای ${solvedPuzzles + 1} از $requiredPuzzles"
+
+        val choices = mutableListOf(currentCorrectAnswer)
+        while (choices.size < 4) {
+            val offset = Random.nextInt(-9, 10)
+            val fake = currentCorrectAnswer + offset
+            if (fake != currentCorrectAnswer && fake >= 0 && !choices.contains(fake)) {
+                choices.add(fake)
+            }
+        }
+        choices.shuffle()
+
+        btnChoice1.text = choices[0].toString()
+        btnChoice2.text = choices[1].toString()
+        btnChoice3.text = choices[2].toString()
+        btnChoice4.text = choices[3].toString()
+    }
+
+    private fun setupFocusMode() {
+        btnCalmSound.setOnClickListener {
+            if (!isFocusActive) {
+                activateFocusMode()
+            }
+        }
+    }
+
+    private fun activateFocusMode() {
+        isFocusActive = true
+        btnCalmSound.isEnabled = false
+        val intent = Intent(this, AlarmService::class.java).apply {
+            action = AlarmService.ACTION_LOWER_VOLUME
+        }
+        startService(intent)
+
+        focusTimer = object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val sec = millisUntilFinished / 1000
+                btnCalmSound.text = "سکوت موقت: ${sec}s"
+            }
+
+            override fun onFinish() {
+                isFocusActive = false
+                btnCalmSound.isEnabled = true
+                btnCalmSound.text = "آرامش صدا (۳۰ ثانیه)"
+                val restoreIntent = Intent(this@AlarmMissionActivity, AlarmService::class.java).apply {
+                    action = AlarmService.ACTION_RESTORE_VOLUME
+                }
+                startService(restoreIntent)
+            }
+        }.start()
     }
 
     private fun checkAllMissionsDone() {
         if (isWalkCompleted && isPuzzleCompleted) {
-            stepDetector.stopListening()
-            focusTimer?.cancel()
-            restoreLoudSound()
-
             btnDismiss.isEnabled = true
-            btnDismiss.text = "✅ TURN OFF ALARM"
-            btnDismiss.setBackgroundColor(getColor(R.color.accent_emerald))
-            btnDismiss.setTextColor(getColor(R.color.text_main))
-
-            // Completion pop-up dialog
-            AlertDialog.Builder(this)
-                .setTitle("🎉 Congratulations!")
-                .setMessage("All missions completed! You are fully awake and ready for the day.")
-                .setPositiveButton("Dismiss Alarm 🚀") { _, _ ->
-                    stopAlarmAndExit()
-                }
-                .setCancelable(false)
-                .show()
+            btnDismiss.text = "خاموش کردن زنگ (مأموریت‌ها با موفقیت انجام شد ✓)"
+            btnDismiss.setBackgroundColor(getColor(R.color.neon_emerald))
         }
     }
 
-    private fun stopAlarmAndExit() {
-        val serviceIntent = Intent(this, AlarmService::class.java)
-        stopService(serviceIntent)
-        finish()
-    }
+    private fun showWakeUpPopup() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("☀️ بیدار شو قهرمان!")
+            .setMessage("برای خاموش کردن زنگ، باید $requiredSteps گام راه بروی و معماهای ریاضی را حل کنی. تسلیم نشو!")
+            .setPositiveButton("شروع مأموریت") { d, _ -> d.dismiss() }
+            .setCancelable(false)
+            .create()
 
-    override fun onResume() {
-        super.onResume()
-        if (!isWalkCompleted) {
-            stepDetector.startListening()
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (!isWalkCompleted) {
-            stepDetector.startListening()
-        } else {
-            stepDetector.stopListening()
-        }
+        dialog.window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_PANEL)
+        dialog.show()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        stepDetector.stop()
         focusTimer?.cancel()
-        stepDetector.stopListening()
     }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (isWalkCompleted && isPuzzleCompleted) {
-            super.onBackPressed()
-        }
+        // Prevent dismissing alarm via Back button
     }
 }

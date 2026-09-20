@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_main"
@@ -48,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ULTRA v2.0"
+                android:text="v2.2 THEMES"
                 android:textColor="#080C14"
                 android:textSize="11sp"
                 android:textStyle="bold"
@@ -102,247 +103,340 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tvCurrentAlarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="07:00"
+                    android:textColor="@color/text_main"
+                    android:textSize="72sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginVertical="12dp"
+                    android:letterSpacing="-0.02"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSetTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="تغییر زمان بیداری"
+                    android:textColor="#080C14"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp"
+                    android:backgroundTint="@color/neon_cyan"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 🔊 Volume Setting Card (قابلیت تنظیم صدای زنگ) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="20dp"
+            app:strokeColor="#22365A"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="bottom"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tvCurrentAlarm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="07:00"
-                        android:textColor="@color/text_main"
-                        android:textSize="56sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-condensed"
-                        android:includeFontPadding="false"/>
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="AM"
-                        android:textColor="@color/text_dim"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginBottom="10dp"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSetTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:text="EDIT TIME"
+                        android:text="🔊 بلندی صدای زنگ هشدار"
                         android:textColor="@color/text_main"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.05"
-                        android:backgroundTint="@color/neon_blue"
-                        app:cornerRadius="16dp"
-                        android:layout_marginBottom="4dp"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvVolumePercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100%"
+                        android:textColor="@color/neon_cyan"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#1E2E4A"
-                    android:layout_marginVertical="14dp"/>
-
-                <LinearLayout
+                <SeekBar
+                    android:id="@+id/sbVolume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:max="100"
+                    android:progress="100"
+                    android:layout_marginTop="12dp"
+                    android:progressTint="@color/neon_cyan"
+                    android:thumbTint="@color/neon_cyan"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="🛡️ Doze Mode Bypass: Active"
-                        android:textColor="@color/text_muted"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🔋 Sensor Fusion: On"
-                        android:textColor="@color/text_muted"
-                        android:textSize="12sp"/>
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="می‌توانید حجم صدای آلارم را مطابق با نیاز خود کم یا زیاد کنید."
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Mission Selection Header -->
+        <!-- 🎨 Theme Customization Card (محیط چند رنگ) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎨 انتخاب تم و رنگ‌بندی محیط برنامه"
+            android:textColor="@color/text_main"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="14dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <!-- Theme 1: Cyber Dark -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardThemeCyber"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="MISSION PRESET CARDS"
-                android:textColor="@color/text_dim"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1"/>
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#131D31"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="#06B6D4"
+                app:strokeWidth="1.5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+                    <RadioButton
+                        android:id="@+id/rbThemeCyber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#06B6D4"
+                        android:checked="true"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="سایبر دارک (Cyber Dark - فیروزه‌ای)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Theme 2: Neon Purple -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardThemePurple"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TAP TO ACTIVATE"
-                android:textColor="@color/neon_cyan"
-                android:textSize="11sp"
-                android:textStyle="bold"/>
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#1E1835"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="#A855F7"
+                app:strokeWidth="1.5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+                    <RadioButton
+                        android:id="@+id/rbThemePurple"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A855F7"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="بنفش نئونی (Neon Violet - ارغوانی)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Theme 3: Cyber Emerald -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardThemeEmerald"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#0A2B27"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="#10B981"
+                app:strokeWidth="1.5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+                    <RadioButton
+                        android:id="@+id/rbThemeEmerald"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#10B981"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="زمردی سایبری (Cyber Emerald - سبز فسفری)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Theme 4: Sunset Amber -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardThemeAmber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#2C180C"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="#F59E0B"
+                app:strokeWidth="1.5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+                    <RadioButton
+                        android:id="@+id/rbThemeAmber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#F59E0B"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="غروب کهربایی (Sunset Amber - طلایی/نارنجی)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Template 1: Balanced Wake -->
+        <!-- Mission Profiles Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎯 پروفایل مأموریت بیداری"
+            android:textColor="@color/text_main"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Template 1: Balanced Warrior -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTemplateBalanced"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/neon_emerald"
-            app:strokeWidth="2dp"
-            app:cardElevation="4dp">
-
+            app:cardCornerRadius="18dp"
+            app:strokeColor="#1E293B"
+            app:strokeWidth="1dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+                <RadioButton
+                    android:id="@+id/rbBalanced"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
+                    android:buttonTint="@color/neon_cyan"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚡"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Balanced Wake"
-                            android:textColor="@color/text_main"
-                            android:textSize="17sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Daily Recommended Routine"
-                            android:textColor="@color/neon_emerald"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:id="@+id/rbBalanced"
+                        android:text="مأموریت متعادل (پیشنهادی)"
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:clickable="false"/>
+                        android:text="۳۰ گام راه رفتن + ۲ معما برای بیداری هوشمند"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🚶 15 Steps  •  🧠 2 Math Puzzles  •  ⏰ 3m Alertness Check"
-                    android:textColor="@color/text_muted"
-                    android:textSize="13sp"
-                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Template 2: Heavy Sleeper Extreme -->
+        <!-- Template 2: Extreme Wakeup -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTemplateExtreme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp"
-            app:cardElevation="2dp">
-
+            app:cardCornerRadius="18dp"
+            app:strokeColor="#1E293B"
+            app:strokeWidth="1dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+                <RadioButton
+                    android:id="@+id/rbExtreme"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
+                    android:buttonTint="@color/neon_rose"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🔥"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Heavy Sleeper Extreme"
-                            android:textColor="@color/text_main"
-                            android:textSize="17sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Maximum Awake Assurance"
-                            android:textColor="@color/neon_rose"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:id="@+id/rbExtreme"
+                        android:text="مأموریت فوق سنگین (غیرممکن)"
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:clickable="false"/>
+                        android:text="۶۰ گام پیاده‌روی + ۵ معما برای خواب‌سنگین‌ها"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🚶 35 Steps  •  🧠 4 Hard Puzzles  •  🚨 Instant Re-Ring"
-                    android:textColor="@color/text_muted"
-                    android:textSize="13sp"
-                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -353,167 +447,103 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp"
-            app:cardElevation="2dp">
-
+            app:cardCornerRadius="18dp"
+            app:strokeColor="#1E293B"
+            app:strokeWidth="1dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+                <RadioButton
+                    android:id="@+id/rbWalker"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
+                    android:buttonTint="@color/neon_emerald"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🚶"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pure Walker"
-                            android:textColor="@color/text_main"
-                            android:textSize="17sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Zero Math • Movement Only"
-                            android:textColor="@color/neon_cyan"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:id="@+id/rbWalker"
+                        android:text="فقط پیاده‌روی (Physical Only)"
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:clickable="false"/>
+                        android:text="۴۰ گام پیاده‌روی بدون معمای ذهنی"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🚶 30 Steps  •  No puzzles  •  Sensor fusion active"
-                    android:textColor="@color/text_muted"
-                    android:textSize="13sp"
-                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Template 4: Brain Workout -->
+        <!-- Template 4: Pure Brain -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTemplateBrain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="24dp"
             app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/surface_card_border"
-            app:strokeWidth="1dp"
-            app:cardElevation="2dp">
-
+            app:cardCornerRadius="18dp"
+            app:strokeColor="#1E293B"
+            app:strokeWidth="1dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+                <RadioButton
+                    android:id="@+id/rbBrain"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
+                    android:buttonTint="@color/neon_violet"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🧠"
-                        android:textSize="22sp"
-                        android:layout_marginEnd="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Brain Workout"
-                            android:textColor="@color/text_main"
-                            android:textSize="17sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Solve in Bed • Focus Mode"
-                            android:textColor="@color/neon_violet"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:id="@+id/rbBrain"
+                        android:text="فقط چالش ذهنی (Mental Only)"
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:clickable="false"/>
+                        android:text="۴ معمای ریاضی بدون نیاز به راه رفتن"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🧠 5 Math Puzzles  •  0 Steps required  •  Calm Sound key"
-                    android:textColor="@color/text_muted"
-                    android:textSize="13sp"
-                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Quick Test Glow Action Button -->
+        <!-- Instant Test Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTestNow"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginTop="18dp"
-            android:text="⚡ TEST MISSION (RING IN 5S)"
-            android:textColor="#080C14"
-            android:textSize="15sp"
+            android:layout_height="56dp"
+            android:text="⚡ تست فوری آلارم (۵ ثانیه)"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:letterSpacing="0.06"
-            android:backgroundTint="@color/neon_cyan"
-            app:cornerRadius="20dp"
-            app:elevation="8dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Crafted for Dani • Android 14+ Lock Screen Bypass"
-            android:textColor="@color/text_dim"
-            android:textSize="12sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="28dp"/>
+            app:cornerRadius="16dp"
+            android:backgroundTint="#1E293B"
+            app:strokeColor="@color/neon_cyan"
+            app:strokeWidth="1dp"
+            android:layout_marginBottom="30dp"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

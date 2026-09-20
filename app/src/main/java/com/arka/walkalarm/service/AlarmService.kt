@@ -25,6 +25,7 @@ class AlarmService : Service() {
     private var vibrator: Vibrator? = null
     private var wakeLock: PowerManager.WakeLock? = null
     private var originalVolume: Int = 100
+    private var targetAlarmVolumePercent: Int = 100
     private var isFocusModeActive = false
 
     companion object {
@@ -32,6 +33,8 @@ class AlarmService : Service() {
         const val NOTIFICATION_ID = 1001
         const val ACTION_LOWER_VOLUME = "com.arka.walkalarm.ACTION_LOWER_VOLUME"
         const val ACTION_RESTORE_VOLUME = "com.arka.walkalarm.ACTION_RESTORE_VOLUME"
+        const val PREFS_NAME = "WalkAlarmPrefs"
+        const val KEY_ALARM_VOLUME = "ALARM_VOLUME_PERCENT"
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -45,7 +48,7 @@ class AlarmService : Service() {
             PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
             "WalkAlarm:AlarmServiceWakeLock"
         ).apply {
-            acquire(10 * 60 * 1000L /* 10 minutes */)
+            acquire(15 * 60 * 1000L /* 15 minutes */)
         }
     }
 
@@ -55,17 +58,25 @@ class AlarmService : Service() {
             lowerVolumeForFocus()
             return START_STICKY
         } else if (action == ACTION_RESTORE_VOLUME) {
-            restoreMaxVolume()
+            restoreTargetVolume()
             return START_STICKY
         }
 
         val requiredSteps = intent?.getIntExtra("REQUIRED_STEPS", 30) ?: 30
         val missionType = intent?.getStringExtra("MISSION_TYPE") ?: "WALK"
 
+        // Read saved volume setting (default 100%)
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        targetAlarmVolumePercent = prefs.getInt(KEY_ALARM_VOLUME, 100)
+
         val fullScreenIntent = Intent(this, AlarmMissionActivity::class.java).apply {
             putExtra("REQUIRED_STEPS", requiredSteps)
             putExtra("MISSION_TYPE", missionType)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK or
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            )
         }
 
         val fullScreenPendingIntent = PendingIntent.getActivity(
@@ -81,6 +92,7 @@ class AlarmService : Service() {
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setFullScreenIntent(fullScreenPendingIntent, true)
             .setOngoing(true)
             .build()
@@ -90,8 +102,12 @@ class AlarmService : Service() {
         startAlarmSound()
         startVibration()
 
-        // Launch Mission screen immediately
-        startActivity(fullScreenIntent)
+        // Launch full-screen mission popup immediately
+        try {
+            startActivity(fullScreenIntent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         return START_STICKY
     }
@@ -103,8 +119,11 @@ class AlarmService : Service() {
 
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            originalVolume = maxVol
-            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVol, 0)
+            originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM)
+
+            // Set volume according to user preference slider (e.g. 20% to 100%)
+            val desiredVol = ((maxVol * targetAlarmVolumePercent) / 100.0f).toInt().coerceIn(1, maxVol)
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, desiredVol, 0)
 
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(applicationContext, alertUri)
@@ -129,20 +148,22 @@ class AlarmService : Service() {
         try {
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            val focusVol = (maxVol * 0.35f).toInt().coerceAtLeast(1)
+            val currentTarget = ((maxVol * targetAlarmVolumePercent) / 100.0f).toInt().coerceIn(1, maxVol)
+            val focusVol = (currentTarget * 0.30f).toInt().coerceAtLeast(1)
             audioManager.setStreamVolume(AudioManager.STREAM_ALARM, focusVol, 0)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun restoreMaxVolume() {
+    private fun restoreTargetVolume() {
         if (!isFocusModeActive) return
         isFocusModeActive = false
         try {
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVol, 0)
+            val desiredVol = ((maxVol * targetAlarmVolumePercent) / 100.0f).toInt().coerceIn(1, maxVol)
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, desiredVol, 0)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -154,13 +175,14 @@ class AlarmService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator?.vibrate(VibrationEffect.createWaveform(pattern, 0))
         } else {
+            @Suppress("DEPRECATION")
             vibrator?.vibrate(pattern, 0)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        restoreMaxVolume()
+        restoreTargetVolume()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
@@ -178,9 +200,10 @@ class AlarmService : Service() {
                 "WalkAlarm Alert Channel",
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "Alarm Mission Notification"
+                description = "Alarm Full-Screen Mission Notification"
                 setBypassDnd(true)
                 enableVibration(true)
+                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             }
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
