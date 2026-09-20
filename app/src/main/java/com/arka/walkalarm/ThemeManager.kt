@@ -1,8 +1,7 @@
-package com.arka.walkalarm.theme
+package com.arka.walkalarm
 
 import android.content.Context
 import android.graphics.Color
-import com.arka.walkalarm.R
 
 enum class AppTheme(
     val id: String,

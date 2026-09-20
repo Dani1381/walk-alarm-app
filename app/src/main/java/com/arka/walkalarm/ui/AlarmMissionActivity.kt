@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.arka.walkalarm.R
 import com.arka.walkalarm.sensor.StepDetectorManager
 import com.arka.walkalarm.service.AlarmService
-import com.arka.walkalarm.theme.ThemeManager
+import com.arka.walkalarm.ThemeManager
 import kotlin.random.Random
 
 class AlarmMissionActivity : AppCompatActivity() {

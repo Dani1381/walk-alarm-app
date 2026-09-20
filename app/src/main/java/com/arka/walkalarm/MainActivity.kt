@@ -15,8 +15,8 @@ import androidx.core.content.ContextCompat
 import com.arka.walkalarm.alarm.AlarmScheduler
 import com.arka.walkalarm.presets.TemplateManager
 import com.arka.walkalarm.service.AlarmService
-import com.arka.walkalarm.theme.AppTheme
-import com.arka.walkalarm.theme.ThemeManager
+import com.arka.walkalarm.AppTheme
+import com.arka.walkalarm.ThemeManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
