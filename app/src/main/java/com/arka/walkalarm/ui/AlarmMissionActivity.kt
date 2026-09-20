@@ -117,8 +117,8 @@ class AlarmMissionActivity : AppCompatActivity() {
     }
 
     private fun setupWalkMission() {
-        stepDetector = StepDetectorManager(this) { stepCount ->
-            currentSteps = stepCount
+        stepDetector = StepDetectorManager(this) {
+            currentSteps++
             updateStepUI()
 
             if (currentSteps >= requiredSteps && !isWalkCompleted) {
@@ -126,9 +126,9 @@ class AlarmMissionActivity : AppCompatActivity() {
                 onWalkCompleted()
             }
         }
-        stepDetector.start()
+        stepDetector.startListening()
 
-        tvSensorInfo.text = "سنسور گام‌شمار فعال • ${if (stepDetector.isHardwareStepDetectorAvailable()) "دقیق سخت‌افزاری" else "شتاب‌سنج هیبریدی"}"
+        tvSensorInfo.text = "سنسور گام‌شمار فعال • شتاب‌سنج و گام‌شمار هوشمند"
     }
 
     private fun updateStepUI() {
@@ -145,7 +145,7 @@ class AlarmMissionActivity : AppCompatActivity() {
     }
 
     private fun onWalkCompleted() {
-        stepDetector.stop()
+        stepDetector.stopListening()
         checkAllMissionsDone()
     }
 
@@ -269,7 +269,7 @@ class AlarmMissionActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stepDetector.stop()
+        stepDetector.stopListening()
         focusTimer?.cancel()
     }
 
